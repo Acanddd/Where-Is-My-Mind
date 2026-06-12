@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 32 32">
+  <style>
+    @keyframes blink {
+      0%, 90%, 100% { opacity: 1; }
+      95% { opacity: 0; }
+    }
+    
+    @keyframes tailWag {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(-0.5px, -0.3px) rotate(-3deg); }
+      75% { transform: translate(0.5px, 0.3px) rotate(3deg); }
+    }
+    
+    @keyframes whiskerTwitch {
+      0%, 90%, 100% { transform: scaleX(1); }
+      95% { transform: scaleX(0.95); }
+    }
+    
+    @keyframes earFlick {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-0.3px); }
+    }
+    
+    .eye-pupil { animation: blink 4s ease-in-out infinite; }
+    .tail { transform-origin: 25px 22px; animation: tailWag 2s ease-in-out infinite; }
+    .whiskers { animation: whiskerTwitch 3s ease-in-out infinite; }
+    .ear-left { animation: earFlick 5s ease-in-out infinite; }
+    .ear-right { animation: earFlick 5s ease-in-out infinite 0.5s; }
+  </style>
+  
+  <rect width="32" height="32" fill="#0a0a0a"/>
+  <rect x="1" y="1" width="30" height="30" fill="none" stroke="#00ff41" stroke-width="1"/>
+
+  <!-- ears with animation -->
+  <g class="ear-left">
+    <rect x="5" y="5" width="2" height="1" fill="#00ff41"/>
+    <rect x="5" y="6" width="3" height="1" fill="#00ff41"/>
+    <rect x="6" y="7" width="2" height="1" fill="#00ff41"/>
+  </g>
+  <g class="ear-right">
+    <rect x="25" y="5" width="2" height="1" fill="#00ff41"/>
+    <rect x="24" y="6" width="3" height="1" fill="#00ff41"/>
+    <rect x="24" y="7" width="2" height="1" fill="#00ff41"/>
+  </g>
+
+  <!-- head outline -->
+  <rect x="8"  y="7"  width="16" height="1" fill="#00ff41"/>
+  <rect x="7"  y="8"  width="1"  height="8" fill="#00ff41"/>
+  <rect x="25" y="8"  width="1"  height="8" fill="#00ff41"/>
+  <rect x="8"  y="16" width="16" height="1" fill="#00ff41"/>
+
+  <!-- eyes with blink animation -->
+  <rect x="10" y="10" width="3" height="2" fill="#00ff41"/>
+  <rect class="eye-pupil" x="11" y="10" width="1" height="2" fill="#0a0a0a"/>
+  <rect x="19" y="10" width="3" height="2" fill="#00ff41"/>
+  <rect class="eye-pupil" x="20" y="10" width="1" height="2" fill="#0a0a0a"/>
+
+  <!-- nose -->
+  <rect x="15" y="13" width="2" height="1" fill="#00ff41"/>
+
+  <!-- mouth -->
+  <rect x="13" y="14" width="2" height="1" fill="#00ff41"/>
+  <rect x="17" y="14" width="2" height="1" fill="#00ff41"/>
+
+  <!-- whiskers with twitch animation -->
+  <g class="whiskers">
+    <rect x="4"  y="12" width="5" height="1" fill="#00cc33"/>
+    <rect x="4"  y="14" width="5" height="1" fill="#00cc33"/>
+    <rect x="23" y="12" width="5" height="1" fill="#00cc33"/>
+    <rect x="23" y="14" width="5" height="1" fill="#00cc33"/>
+  </g>
+
+  <!-- body -->
+  <rect x="9"  y="17" width="14" height="1" fill="#00ff41"/>
+  <rect x="8"  y="18" width="1"  height="7" fill="#00ff41"/>
+  <rect x="24" y="18" width="1"  height="7" fill="#00ff41"/>
+  <rect x="9"  y="25" width="14" height="1" fill="#00ff41"/>
+
+  <!-- paws -->
+  <rect x="8"  y="26" width="4" height="2" fill="#00ff41"/>
+  <rect x="20" y="26" width="4" height="2" fill="#00ff41"/>
+
+  <!-- tail with wag animation -->
+  <g class="tail">
+    <rect x="25" y="22" width="3" height="1" fill="#00ff41"/>
+    <rect x="27" y="21" width="1" height="1" fill="#00ff41"/>
+    <rect x="27" y="23" width="1" height="2" fill="#00ff41"/>
+  </g>
+</svg>

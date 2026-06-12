@@ -1,0 +1,121 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.cat {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  cursor: grab;
+  pointer-events: all;
+  user-select: none;
+  image-rendering: pixelated;
+  filter: var(--drop-cat-idle);
+  transition: filter 0.2s, opacity 1.5s;
+}
+
+.cat.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cat:active {
+  cursor: grabbing;
+}
+
+.cat:hover {
+  filter: var(--drop-cat-hover);
+}
+
+.cat.running {
+  filter: var(--drop-cat-run);
+}
+
+.cat.sleeping {
+  filter: var(--drop-cat-sleep);
+}
+
+.cat.sleeping:not(.hidden) {
+  opacity: 0.7;
+}
+
+.cat.jumping {
+  animation: catJump 0.45s cubic-bezier(0.33, 1, 0.68, 1);
+  filter: var(--drop-cat-jump);
+}
+
+@keyframes catJump {
+  0%   { transform: translateY(0)   scaleY(1)    scaleX(1); }
+  15%  { transform: translateY(0)   scaleY(0.75) scaleX(1.3); }
+  40%  { transform: translateY(-28px) scaleY(1.1)  scaleX(0.9); }
+  70%  { transform: translateY(-20px) scaleY(1.05) scaleX(0.95); }
+  88%  { transform: translateY(0)   scaleY(0.8)  scaleX(1.2); }
+  100% { transform: translateY(0)   scaleY(1)    scaleX(1); }
+}
+
+.exitBtn {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 18px;
+  height: 18px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.cat:hover .exitBtn {
+  opacity: 1;
+}
+
+.exitBtn:hover {
+  background: var(--color-primary);
+  color: var(--color-bg);
+  box-shadow: var(--glow-btn-sm);
+}
+
+.bubble {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-bg-panel);
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  padding: 4px 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: 0.5px;
+  animation: bubbleFade 2s ease-in-out forwards;
+}
+
+.bubble::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: var(--color-primary);
+}
+
+@keyframes bubbleFade {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(4px); }
+  15%  { opacity: 1; transform: translateX(-50%) translateY(0); }
+  70%  { opacity: 1; }
+  100% { opacity: 0; }
+}

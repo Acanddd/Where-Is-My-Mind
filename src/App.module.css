@@ -1,0 +1,86 @@
+.app {
+  width: 100vw;
+  height: 100vh;
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  border: var(--border);
+  box-shadow: var(--glow-window);
+  overflow: hidden;
+}
+
+.content {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.tabbar {
+  height: var(--tabbar-height);
+  display: flex;
+  border-top: var(--border);
+  background: var(--color-bg-panel);
+}
+
+.tab {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--color-text-dim);
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+}
+
+.tab:hover {
+  background: var(--color-bg-hover);
+  color: var(--color-text);
+}
+
+.tab.active {
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+.tab.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-primary);
+  box-shadow: var(--glow-tab);
+}
+
+.tab:first-child {
+  border-right: var(--border);
+}
+
+.settingsBtn {
+  flex: 0 0 36px;
+  background: transparent;
+  border: none;
+  border-right: var(--border);
+  color: var(--color-text-dim);
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.settingsBtn:hover {
+  background: var(--color-bg-hover);
+  color: var(--color-text);
+}
+
+.settingsBtnActive {
+  color: var(--color-text);
+  background: var(--color-bg);
+  box-shadow: inset 0 2px 0 var(--color-primary);
+}

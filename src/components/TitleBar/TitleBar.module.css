@@ -1,0 +1,57 @@
+.titlebar {
+  height: var(--titlebar-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-2) 0 var(--space-2);
+  background: var(--color-bg-panel);
+  border-bottom: var(--border);
+  cursor: move;
+}
+
+.title {
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  letter-spacing: 0.5px;
+  text-shadow: var(--glow-text-title);
+  flex: 1;
+  pointer-events: none;
+}
+
+.controls {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.btn {
+  min-width: 24px;
+  width: auto;
+  padding: 0 var(--space-2);
+  height: 24px;
+  background: var(--color-bg);
+  border: var(--border);
+  color: var(--color-text);
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s;
+}
+
+.btn:hover {
+  background: var(--color-primary);
+  color: var(--color-bg);
+  box-shadow: var(--glow-btn);
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.btnActive {
+  background: var(--color-primary);
+  color: var(--color-bg);
+  box-shadow: var(--glow-btn);
+}

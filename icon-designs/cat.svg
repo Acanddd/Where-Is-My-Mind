@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 32 32">
+  <rect width="32" height="32" fill="#0a0a0a"/>
+  <!-- outer border -->
+  <rect x="1" y="1" width="30" height="30" fill="none" stroke="#00ff41" stroke-width="1"/>
+
+  <!-- pixel cat drawn on a 32x32 grid, each "pixel" = 1 unit -->
+
+  <!-- ears (left) -->
+  <rect x="5" y="5" width="2" height="1" fill="#00ff41"/>
+  <rect x="5" y="6" width="3" height="1" fill="#00ff41"/>
+  <rect x="6" y="7" width="2" height="1" fill="#00ff41"/>
+  <!-- ears (right) -->
+  <rect x="25" y="5" width="2" height="1" fill="#00ff41"/>
+  <rect x="24" y="6" width="3" height="1" fill="#00ff41"/>
+  <rect x="24" y="7" width="2" height="1" fill="#00ff41"/>
+
+  <!-- head outline -->
+  <rect x="8"  y="7"  width="16" height="1" fill="#00ff41"/>
+  <rect x="7"  y="8"  width="1"  height="8" fill="#00ff41"/>
+  <rect x="25" y="8"  width="1"  height="8" fill="#00ff41"/>
+  <rect x="8"  y="16" width="16" height="1" fill="#00ff41"/>
+
+  <!-- eyes -->
+  <rect x="10" y="10" width="3" height="2" fill="#00ff41"/>
+  <rect x="11" y="10" width="1" height="2" fill="#0a0a0a"/>
+  <rect x="19" y="10" width="3" height="2" fill="#00ff41"/>
+  <rect x="20" y="10" width="1" height="2" fill="#0a0a0a"/>
+
+  <!-- nose -->
+  <rect x="15" y="13" width="2" height="1" fill="#00ff41"/>
+
+  <!-- mouth -->
+  <rect x="13" y="14" width="2" height="1" fill="#00ff41"/>
+  <rect x="17" y="14" width="2" height="1" fill="#00ff41"/>
+
+  <!-- whiskers left -->
+  <rect x="4"  y="12" width="5" height="1" fill="#00cc33"/>
+  <rect x="4"  y="14" width="5" height="1" fill="#00cc33"/>
+  <!-- whiskers right -->
+  <rect x="23" y="12" width="5" height="1" fill="#00cc33"/>
+  <rect x="23" y="14" width="5" height="1" fill="#00cc33"/>
+
+  <!-- body -->
+  <rect x="9"  y="17" width="14" height="1" fill="#00ff41"/>
+  <rect x="8"  y="18" width="1"  height="7" fill="#00ff41"/>
+  <rect x="24" y="18" width="1"  height="7" fill="#00ff41"/>
+  <rect x="9"  y="25" width="14" height="1" fill="#00ff41"/>
+
+  <!-- paws -->
+  <rect x="8"  y="26" width="4" height="2" fill="#00ff41"/>
+  <rect x="20" y="26" width="4" height="2" fill="#00ff41"/>
+
+  <!-- tail -->
+  <rect x="25" y="22" width="3" height="1" fill="#00ff41"/>
+  <rect x="27" y="21" width="1" height="1" fill="#00ff41"/>
+  <rect x="27" y="23" width="1" height="2" fill="#00ff41"/>
+</svg>

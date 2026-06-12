@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import './tokens.css';
+
+/* --- Reset --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-pixel);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  background: transparent;
+  -webkit-font-smoothing: none;
+  image-rendering: pixelated;
+  user-select: none;
+}
+
+/* CJK content areas use fusion pixel font */
+.selectable, textarea, .cjk {
+  font-family: var(--font-pixel-cjk);
+  user-select: text;
+}
+
+/* --- Scrollbar --- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+  border-left: 2px solid var(--color-border);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar);
+  border: none;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-dim);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--color-bg);
+}
+
+/* --- Scanline overlay — below pet layer (9999) --- */
+#root::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, var(--scanline-opacity)) 2px,
+    rgba(0, 0, 0, var(--scanline-opacity)) 4px
+  );
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* --- Animations --- */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes pixel-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { text-shadow: 0 0 4px var(--color-primary); }
+  50%       { text-shadow: 0 0 12px var(--color-primary), 0 0 24px var(--color-primary-dim); }
+}
+
+.blink {
+  animation: blink var(--blink-speed) step-end infinite;
+}
+
+.glow {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* --- Pet cat animations --- */
+@keyframes catBlink {
+  0%, 94%, 100% { opacity: 1; }
+  95%, 97% { opacity: 0; }
+}
+@keyframes catTailWag {
+  0%, 100% { transform-origin: 25px 22px; transform: rotate(0deg); }
+  30% { transform-origin: 25px 22px; transform: rotate(-18deg); }
+  70% { transform-origin: 25px 22px; transform: rotate(18deg); }
+}
+@keyframes catEarFlick {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-0.5px); }
+}
+@keyframes catWhiskerTwitch {
+  0%, 90%, 100% { transform: scaleX(1); }
+  95% { transform: scaleX(0.9); }
+}
+@keyframes catRunBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+@keyframes catSleepBreath {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.04); }
+}
+
+.pet-ear-left   { animation: catEarFlick 4.5s ease-in-out infinite; }
+.pet-ear-right  { animation: catEarFlick 4.5s ease-in-out infinite 0.6s; }
+.pet-eyes       { animation: catBlink 4s step-end infinite; }
+.pet-whiskers   { animation: catWhiskerTwitch 3.5s ease-in-out infinite; }
+.pet-tail       { animation: catTailWag 1.8s ease-in-out infinite; }
+.pet-body-run   { animation: catRunBounce 0.35s ease-in-out infinite; }
+.pet-body-sleep { animation: catSleepBreath 3s ease-in-out infinite; }

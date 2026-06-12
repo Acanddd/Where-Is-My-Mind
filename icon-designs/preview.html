@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PixelNook 猫咪桌宠预览</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Courier New', monospace;
+      color: #00ff41;
+      padding: 20px;
+    }
+    
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px #00ff41;
+    }
+    
+    .subtitle {
+      font-size: 14px;
+      color: #00cc33;
+      margin-bottom: 40px;
+    }
+    
+    .preview-container {
+      background: #0a0a0a;
+      border: 2px solid #00ff41;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+      margin-bottom: 30px;
+    }
+    
+    .cat-container {
+      width: 400px;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .info {
+      max-width: 600px;
+      text-align: center;
+      line-height: 1.8;
+      color: #00cc33;
+      background: #0a0a0a;
+      padding: 20px;
+      border: 1px solid #00ff41;
+      border-radius: 4px;
+    }
+    
+    .info h2 {
+      color: #00ff41;
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+    
+    .info ul {
+      text-align: left;
+      list-style: none;
+      padding-left: 20px;
+    }
+    
+    .info li::before {
+      content: "▸ ";
+      color: #00ff41;
+    }
+    
+    .info li {
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>🐱 PIXELNOOK 猫咪桌宠动画预览</h1>
+  <p class="subtitle">Pixel Cat Desktop Pet Animation Demo</p>
+  
+  <div class="preview-container">
+    <div class="cat-container">
+      <img src="cat-animated.svg" alt="Animated Pixel Cat" style="width: 100%; height: 100%;">
+    </div>
+  </div>
+  
+  <div class="info">
+    <h2>当前动画效果</h2>
+    <ul>
+      <li>眨眼动画 (4秒循环)</li>
+      <li>尾巴摇摆 (2秒循环，左右摆动)</li>
+      <li>胡须抽动 (3秒循环)</li>
+      <li>耳朵抖动 (5秒循环，左右耳朵错开)</li>
+    </ul>
+    <p style="margin-top: 20px; font-size: 12px;">
+      图标已成功替换到 src-tauri/icons/ 目录<br>
+      重新运行 npm run tauri dev 即可看到新图标
+    </p>
+  </div>
+</body>
+</html>
