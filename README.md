@@ -53,26 +53,6 @@
 
 ---
 
-## 技术栈
-
-- **[Tauri 2](https://tauri.app/)** — 桌面应用框架
-- **React 18 + TypeScript** — 前端
-- **Vite 5** — 构建工具
-- **Zustand** — 状态管理
-- **Howler.js** — 音频播放
-- **CSS Modules** — 样式隔离
-
----
-
-## 开发环境要求
-
-- **Node.js** v18+
-- **Rust** 工具链
-  - Windows：下载安装 [rustup-init.exe](https://rustup.rs/)
-  - macOS / Linux：`curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
-
----
-
 ## 快速开始
 
 ```bash
