@@ -5,7 +5,7 @@ import TitleBar from './components/TitleBar/TitleBar';
 import Notepad from './modules/notepad/Notepad';
 import Player from './modules/player/Player';
 import MiniPlayer from './modules/player/MiniPlayer';
-import PetCat from './modules/pet/PetCat';
+import Pet from './modules/pet/Pet';
 import SettingsPanel from './components/SettingsPanel/SettingsPanel';
 import { useSettingsStore } from './store/settingsStore';
 import styles from './App.module.css';
@@ -41,7 +41,7 @@ function App() {
     return (
       <div className={styles.app}>
         <MiniPlayer />
-        {petMode && <PetCat />}
+        {petMode && <Pet />}
       </div>
     );
   }
@@ -79,7 +79,7 @@ function App() {
 
       {showSettings && <SettingsPanel onClose={() => setShowSettings(false)} />}
 
-      {petMode && <PetCat />}
+      {petMode && <Pet />}
     </div>
   );
 }

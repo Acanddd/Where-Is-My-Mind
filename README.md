@@ -1,140 +1,146 @@
 # Where Is My Mind
 
-像素风格桌面挂机小程序，提供记事本、音乐播放和桌面宠物功能。
+> 像素风桌面小程序 — 记事本、音乐播放器、桌面宠物。
 
-## 预览
+![Platform](https://img.shields.io/badge/platform-Windows-blue)
+![Tauri](https://img.shields.io/badge/Tauri-2.x-orange)
+![React](https://img.shields.io/badge/React-18-61dafb)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-- 🎨 复古像素风格界面（黑绿终端配色）
-- 📝 多标签记事本（Ctrl+滚轮缩放字号，自动保存）
-- 🎵 本地音乐播放器（带伪频谱可视化）
-- 🐱 桌面宠物猫（可拖拽、互动、自动游荡）
-- 🪟 无边框透明窗口，始终置顶
-- 💾 轻量级（~15MB 绿色单文件）
+---
+
+## 功能概览
+
+| 模块 | 功能 |
+|------|------|
+| 记事本 | 多标签、打开/保存文件、Ctrl+S、Ctrl+滚轮缩放字号、自动保存 |
+| 音乐播放器 | 本地音乐库、完整播放控制、伪频谱可视化、Mini 模式 |
+| 桌面宠物 | 像素猫咪、拖拽、随机游荡、互动对话、双击入睡 |
+
+- 无边框透明窗口，始终置顶
+- 四种像素主题（绿 / 琥珀 / 白 / 浅色）
+- 轻量级，约 15MB 绿色单文件，无需安装
+
+---
+
+## 截图
+
+> *(待补充)*
+
+---
 
 ## 技术栈
 
-- **Tauri 2** - 桌面应用框架
-- **React 18 + TypeScript** - 前端框架
-- **Vite 5** - 构建工具
-- **Zustand** - 状态管理
-- **Howler.js** - 音频播放
-- **CSS Modules** - 样式隔离
+- **[Tauri 2](https://tauri.app/)** — 桌面应用框架
+- **React 18 + TypeScript** — 前端
+- **Vite 5** — 构建工具
+- **Zustand** — 状态管理
+- **Howler.js** — 音频播放
+- **CSS Modules** — 样式隔离
+
+---
 
 ## 开发环境要求
 
-1. **Node.js** (推荐 v18+)
-2. **Rust** (需要安装 Rust 工具链)
-   - Windows: 下载并安装 [rustup-init.exe](https://rustup.rs/)
-   - macOS/Linux: `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
+- **Node.js** v18+
+- **Rust** 工具链
+  - Windows：下载安装 [rustup-init.exe](https://rustup.rs/)
+  - macOS / Linux：`curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
+
+---
 
 ## 快速开始
 
-### 1. 安装依赖
-
 ```bash
+# 1. 安装依赖
 npm install
-```
 
-### 2. 启动开发服务器
-
-```bash
-# Windows PowerShell
-$env:PATH += ";$env:USERPROFILE\.cargo\bin"
+# 2. 启动开发服务器
 npm run tauri dev
 
-# macOS/Linux
-npm run tauri dev
-```
+# Windows PowerShell 若提示找不到 cargo，先执行：
+# $env:PATH += ";$env:USERPROFILE\.cargo\bin"
 
-### 3. 构建生产版本
-
-```bash
+# 3. 构建生产版本
 npm run tauri build
 ```
 
-构建产物位于 `src-tauri/target/release/where-is-my-mind.exe`（绿色单文件，无需安装）
+构建产物位于 `src-tauri/target/release/where-is-my-mind.exe`，直接分发即可。
+
+---
 
 ## 项目结构
 
 ```
 where-is-my-mind/
-├── src/                        # React 前端
-│   ├── components/             # UI 组件
-│   │   └── TitleBar/           # 自定义标题栏
-│   ├── modules/                # 功能模块
-│   │   ├── notepad/            # 记事本模块
-│   │   ├── player/             # 音乐播放器模块
-│   │   └── pet/                # 桌面宠物模块
-│   ├── store/                  # Zustand 状态管理
-│   ├── styles/                 # 全局样式和设计系统
-│   ├── App.tsx                 # 主应用
-│   └── main.tsx                # React 入口
-├── src-tauri/                  # Rust 后端
-│   ├── src/main.rs             # Tauri 入口
-│   ├── tauri.conf.json         # Tauri 配置
-│   ├── icons/                  # 应用图标（像素猫）
-│   └── Cargo.toml              # Rust 依赖
-├── icon-designs/               # 图标设计稿（SVG）
-└── ROADMAP.md                  # 详细开发路线图
+├── src/
+│   ├── components/          # 公共 UI 组件（TitleBar、SettingsPanel）
+│   ├── modules/
+│   │   ├── notepad/         # 记事本模块
+│   │   ├── player/          # 音乐播放器模块
+│   │   └── pet/             # 桌面宠物模块
+│   ├── store/               # Zustand 全局状态
+│   ├── styles/              # 设计 tokens 和全局样式
+│   ├── App.tsx
+│   └── main.tsx
+├── src-tauri/
+│   ├── src/main.rs          # Tauri 入口
+│   ├── icons/               # 应用图标
+│   ├── capabilities/        # Tauri 权限配置
+│   └── tauri.conf.json
+├── public/
+│   └── fonts/               # Fusion Pixel 字体
+└── icon-designs/            # 图标设计稿（SVG）
 ```
 
-## 功能说明
+---
 
-### 记事本模块
-- 多标签管理（新建/删除/切换）
-- 打开/保存 .txt 和 .md 文件
-- Ctrl+S 快速保存
-- Ctrl+滚轮 缩放字号（8px ~ 32px）
-- 自动保存到 localStorage
-- 像素字体和光标动画
-- 实时字符计数
+## 使用说明
 
-### 音乐播放器模块
-- 导入本地音乐文件/文件夹
-- 支持格式：MP3, FLAC, OGG, WAV, M4A, AAC, WMA
-- 完整播放控制（播放/暂停/上一首/下一首）
-- 进度条拖拽、音量控制
-- 伪像素柱状频谱可视化（基于时间动画）
-- 随机播放、循环模式（单曲/列表）
-- 播放列表管理（删除单曲、清空）
-- Mini 模式（320×145 迷你播放器）
+### 窗口控制
 
-### 桌面宠物模块
-- 像素猫咪，带完整动画（眨眼、摇尾、抖耳、抽胡须）
-- 鼠标拖拽移动位置
-- 点击随机对话（MEOW/PURR/NYA 等）
-- 双击切换睡眠/唤醒状态
-- 自动游荡（6~14 秒随机走向新位置）
-- 走路时身体弹跳动画
-- 朝向自动翻转（面向移动方向）
+| 操作 | 方式 |
+|------|------|
+| 移动窗口 | 拖拽标题栏 |
+| 切换桌面宠物 | 标题栏 `CAT` 按钮 |
+| 进入 Mini 播放器 | 标题栏 `▼` 按钮 |
+| 最小化 | 标题栏 `_` 按钮 |
+| 关闭 | 标题栏 `X` 按钮 |
 
-## 窗口控制
+### 记事本
 
-- **拖拽移动**：点击标题栏拖动
-- **桌面宠物**：点击标题栏 `CAT` 按钮切换显示/隐藏
-- **Mini 模式**：点击标题栏 `▼` 按钮进入迷你播放器
-- **最小化**：点击标题栏 `_` 按钮
-- **关闭**：点击标题栏 `X` 按钮
-- **始终置顶**：默认启用
+- 多标签：`+` 新建，`x` 关闭
+- `Ctrl+S` 保存，`Ctrl+滚轮` 缩放字号（8px–32px）
+- 支持打开 `.txt` / `.md` 文件
 
-## 主题切换
+### 音乐播放器
 
-默认提供三种像素主题（可在代码中切换）：
-- **绿色**（经典终端绿 `#00ff41`）
-- **琥珀色**（复古琥珀黄 `#ffb000`）
-- **白色**（简约白 `#e0e0e0`）
+- 支持格式：MP3、FLAC、OGG、WAV、M4A、AAC、WMA
+- 随机播放 / 单曲循环 / 列表循环
+- `▼` 按钮切换 Mini 模式（320×145）
 
-## 开发说明
+### 桌面宠物
 
-详细的开发路线图和技术细节请查看 [ROADMAP.md](./ROADMAP.md)
+- 单击：随机对话气泡
+- 双击：入睡并淡出隐藏
+- 拖拽：自由移动
+- 在记事本打字时自动移动到状态栏上方
 
-## 发版流程
+---
 
-1. 修改 `tauri.conf.json` 和 `package.json` 的版本号
-2. 执行构建：`npm run tauri build`
-3. 产物位于 `src-tauri/target/release/where-is-my-mind.exe`
-4. 直接分发 .exe 文件即可（绿色单文件，15MB）
+## 主题
 
-## 许可证
+在设置面板（`⚙` 按钮）中切换：
 
-MIT
+| 主题 | 主色 |
+|------|------|
+| Green | `#00ff41` 经典终端绿 |
+| Amber | `#ffb000` 复古琥珀黄 |
+| White | `#e0e0e0` 简约白 |
+| Light | `#1a1a1a` 浅色模式 |
+
+---
+
+## License
+
+[MIT](./LICENSE)

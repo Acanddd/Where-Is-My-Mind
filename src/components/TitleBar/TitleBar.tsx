@@ -16,7 +16,7 @@ function TitleBar() {
           onClick={() => setPetMode(!petMode)}
           title={petMode ? 'Hide pet' : 'Desktop pet'}
         >
-          CAT
+          PET
         </button>
         <button className={styles.btn} onClick={() => setMiniMode(true)} title="Mini mode">
           ▼

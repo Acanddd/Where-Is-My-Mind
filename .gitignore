@@ -32,9 +32,11 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Local font source (already copied to public/fonts)
-缝合怪像素字体/
 
 # Temporary files
 *.tmp
 *.temp
+
+# Release artifacts and build scripts
+releases/
+release.ps1

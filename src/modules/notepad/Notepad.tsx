@@ -1,8 +1,10 @@
-import { useEffect, useCallback, useRef } from 'react';
+import { useEffect, useCallback, useRef, useState } from 'react';
+import { getCurrentWindow } from '@tauri-apps/api/window';
 import { open, save } from '@tauri-apps/plugin-dialog';
 import { readTextFile, writeTextFile } from '@tauri-apps/plugin-fs';
 import { useNotepadStore } from '../../store/notepadStore';
 import { useSettingsStore } from '../../store/settingsStore';
+import TodoList from './TodoList';
 import styles from './Notepad.module.css';
 
 const FONT_MIN = 8;
@@ -17,11 +19,13 @@ function Notepad() {
     addNote,
     deleteNote,
     updateContent,
+    setCursorPosition,
     setActiveNote,
     openFile,
-    markSaved,
+    resetToNew,
   } = useNotepadStore();
 
+  const [showTodoList, setShowTodoList] = useState(false);
   const activeNote = notes.find((n) => n.id === activeNoteId) ?? notes[0];
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -33,12 +37,30 @@ function Notepad() {
     }
   }, [activeNoteId, notes, setActiveNote]);
 
+  useEffect(() => {
+    if (textareaRef.current && activeNote && !showTodoList) {
+      const position = activeNote.cursorPosition || 0;
+      textareaRef.current.selectionStart = position;
+      textareaRef.current.selectionEnd = position;
+      textareaRef.current.focus();
+    }
+  }, [activeNote?.id, showTodoList]);
+
   const handleOpenFile = useCallback(async () => {
     const selected = await open({
       multiple: false,
       filters: [{ name: 'Text Files', extensions: ['txt', 'md'] }],
     });
     if (!selected || typeof selected !== 'string') return;
+
+    // If this file is already open in a tab, just switch to it
+    const { notes: latestNotes, setActiveNote: switchNote } = useNotepadStore.getState();
+    const existing = latestNotes.find((n) => n.filePath === selected);
+    if (existing) {
+      switchNote(existing.id);
+      return;
+    }
+
     try {
       const content = await readTextFile(selected);
       const fileName = selected.split(/[/\\]/).pop() ?? selected;
@@ -49,7 +71,7 @@ function Notepad() {
   }, [openFile]);
 
   const handleSave = useCallback(async () => {
-    const { notes: latestNotes, activeNoteId: latestId } = useNotepadStore.getState();
+    const { notes: latestNotes, activeNoteId: latestId, markSaved: markSavedFn } = useNotepadStore.getState();
     const note = latestNotes.find((n) => n.id === latestId) ?? latestNotes[0];
     if (!note) return;
 
@@ -66,11 +88,12 @@ function Notepad() {
 
     try {
       await writeTextFile(targetPath, note.content);
-      markSaved(note.id, targetPath);
+      markSavedFn(note.id, targetPath);
     } catch (e) {
       console.error('Failed to save file:', e);
+      alert(`Failed to save file: ${e}`);
     }
-  }, [markSaved]);
+  }, []);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -114,17 +137,20 @@ function Notepad() {
           >
             <span className={styles.tabLabel}>{note.title.slice(0, 8)}</span>
             {note.isDirty && <span className={styles.dirtyDot}>*</span>}
-            {notes.length > 1 && (
-              <span
-                className={styles.tabClose}
-                onClick={(e) => {
-                  e.stopPropagation();
+            <span
+              className={styles.tabClose}
+              onClick={(e) => {
+                e.stopPropagation();
+                if (notes.length === 1) {
+                  resetToNew();
+                  getCurrentWindow().close();
+                } else {
                   deleteNote(note.id);
-                }}
-              >
-                x
-              </span>
-            )}
+                }
+              }}
+            >
+              x
+            </span>
           </button>
         ))}
         <button className={styles.addBtn} onClick={addNote} title="New note">
@@ -148,28 +174,47 @@ function Notepad() {
             {fileLabel}
           </span>
         )}
+        <button
+          className={`${styles.todoToggle} ${showTodoList ? styles.todoToggleActive : ''}`}
+          onClick={() => setShowTodoList(!showTodoList)}
+          title={showTodoList ? 'Show notepad' : 'Show todo list'}
+        >
+          ✓
+        </button>
       </div>
 
-      {activeNote && (
-        <textarea
-          ref={textareaRef}
-          key={activeNote.id}
-          className={`${styles.editor} selectable`}
-          style={{ fontSize: `${fontSize}px` }}
-          value={activeNote.content}
-          onChange={(e) => {
-            updateContent(activeNote.id, e.target.value);
-            setIsTyping(true);
-            if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
-            typingTimeoutRef.current = setTimeout(() => setIsTyping(false), 3000);
-          }}
-          onBlur={() => {
-            if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
-            setIsTyping(false);
-          }}
-          spellCheck={false}
-          placeholder={'> START TYPING...'}
-        />
+      {showTodoList ? (
+        <TodoList />
+      ) : (
+        activeNote && (
+          <textarea
+            ref={textareaRef}
+            key={activeNote.id}
+            className={`${styles.editor} selectable`}
+            style={{ fontSize: `${fontSize}px` }}
+            value={activeNote.content}
+            onChange={(e) => {
+              updateContent(activeNote.id, e.target.value);
+              setIsTyping(true);
+              if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
+              typingTimeoutRef.current = setTimeout(() => setIsTyping(false), 3000);
+            }}
+            onBlur={() => {
+              if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
+              if (textareaRef.current) {
+                setCursorPosition(activeNote.id, textareaRef.current.selectionStart);
+              }
+              setIsTyping(false);
+            }}
+            onClick={() => {
+              if (textareaRef.current) {
+                setCursorPosition(activeNote.id, textareaRef.current.selectionStart);
+              }
+            }}
+            spellCheck={false}
+            placeholder={'> START TYPING...'}
+          />
+        )
       )}
 
       <div className={styles.statusbar}>

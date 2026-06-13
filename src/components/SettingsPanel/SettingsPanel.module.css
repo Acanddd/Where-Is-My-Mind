@@ -68,6 +68,10 @@
   text-transform: uppercase;
 }
 
+.sectionLabelSpaced {
+  margin-top: var(--space-4);
+}
+
 .themeGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -182,4 +186,57 @@
 }
 .previewLight::after {
   color: #1a1a1a;
+}
+
+.petGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+}
+
+.petBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-2) var(--space-1);
+  background: var(--color-bg);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.1s, background 0.1s;
+  position: relative;
+}
+
+.petBtn:hover {
+  background: var(--color-bg-hover);
+  border-color: var(--color-text-dim);
+}
+
+.petBtn.selected {
+  border-color: var(--color-text);
+  box-shadow: 0 0 8px var(--color-primary);
+}
+
+.petBtn.selected::after {
+  content: '◆';
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  font-size: 6px;
+  color: var(--color-text);
+  font-family: var(--font-pixel);
+}
+
+.petPreview {
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  color: var(--color-text);
+  height: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  white-space: nowrap;
+  letter-spacing: 0;
 }

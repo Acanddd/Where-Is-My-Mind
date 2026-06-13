@@ -1,35 +1,37 @@
 {
-  "$schema": "https://schema.tauri.app/config/2.0.0",
-  "productName": "Where Is My Mind",
-  "version": "0.1.0",
-  "identifier": "com.whereismymind.app",
-  "build": {
-    "beforeDevCommand": "npm run dev",
-    "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "npm run build",
-    "frontendDist": "../dist"
-  },
-  "app": {
-    "windows": [
-      {
-        "title": "Where Is My Mind",
-        "width": 420,
-        "height": 560,
-        "resizable": false,
-        "center": true,
-        "decorations": false,
-        "transparent": true,
-        "alwaysOnTop": true,
-        "skipTaskbar": false,
-        "visible": true
-      }
-    ],
-    "security": {
-      "csp": null,
-      "assetProtocol": {
-        "enable": true,
-        "scope": ["**"]
-      }
-    }
-  }
+    "$schema":  "https://schema.tauri.app/config/2.0.0",
+    "productName":  "Where Is My Mind",
+    "version":  "0.0.1",
+    "identifier":  "com.whereismymind.app",
+    "build":  {
+                  "beforeDevCommand":  "npm run dev",
+                  "devUrl":  "http://localhost:1420",
+                  "beforeBuildCommand":  "npm run build",
+                  "frontendDist":  "../dist"
+              },
+    "app":  {
+                "windows":  [
+                                {
+                                    "title":  "Where Is My Mind",
+                                    "width":  420,
+                                    "height":  560,
+                                    "resizable":  false,
+                                    "center":  true,
+                                    "decorations":  false,
+                                    "transparent":  true,
+                                    "alwaysOnTop":  true,
+                                    "skipTaskbar":  false,
+                                    "visible":  true
+                                }
+                            ],
+                "security":  {
+                                 "csp":  null,
+                                 "assetProtocol":  {
+                                                       "enable":  true,
+                                                       "scope":  [
+                                                                     "**"
+                                                                 ]
+                                                   }
+                             }
+            }
 }

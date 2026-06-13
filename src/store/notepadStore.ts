@@ -8,6 +8,7 @@ export interface Note {
   updatedAt: number;
   filePath: string | null;
   isDirty: boolean;
+  cursorPosition?: number;
 }
 
 interface NotepadStore {
@@ -18,10 +19,12 @@ interface NotepadStore {
   deleteNote: (id: string) => void;
   renameNote: (id: string, title: string) => void;
   updateContent: (id: string, content: string) => void;
+  setCursorPosition: (id: string, position: number) => void;
   setActiveNote: (id: string) => void;
   openFile: (title: string, content: string, filePath: string) => void;
   markSaved: (id: string, filePath: string) => void;
   setFontSize: (size: number) => void;
+  resetToNew: () => void;
 }
 
 const createNote = (): Note => ({
@@ -31,6 +34,7 @@ const createNote = (): Note => ({
   updatedAt: Date.now(),
   filePath: null,
   isDirty: false,
+  cursorPosition: 0,
 });
 
 export const useNotepadStore = create<NotepadStore>()(
@@ -75,6 +79,13 @@ export const useNotepadStore = create<NotepadStore>()(
           ),
         })),
 
+      setCursorPosition: (id, position) =>
+        set((state) => ({
+          notes: state.notes.map((n) =>
+            n.id === id ? { ...n, cursorPosition: position } : n,
+          ),
+        })),
+
       setActiveNote: (id) => set({ activeNoteId: id }),
 
       openFile: (title, content, filePath) => {
@@ -85,6 +96,7 @@ export const useNotepadStore = create<NotepadStore>()(
           updatedAt: Date.now(),
           filePath,
           isDirty: false,
+          cursorPosition: 0,
         };
         set((state) => ({
           notes: [...state.notes, note],
@@ -100,6 +112,12 @@ export const useNotepadStore = create<NotepadStore>()(
         })),
 
       setFontSize: (size) => set({ fontSize: Math.min(32, Math.max(8, size)) }),
+
+      resetToNew: () =>
+        set({
+          notes: [createNote()],
+          activeNoteId: null,
+        }),
     }),
     {
       name: 'pixelnook-notepad',
