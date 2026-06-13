@@ -40,3 +40,9 @@ yarn-error.log*
 # Release artifacts and build scripts
 releases/
 release.ps1
+
+# Image processing scripts (local tooling only)
+merge_images.py
+merge_pets.py
+merge_pets_simple.py
+screenshots/pets.svg

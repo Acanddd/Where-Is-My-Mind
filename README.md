@@ -25,7 +25,31 @@
 
 ## 截图
 
-> *(待补充)*
+### 主题展示
+
+![四种主题](screenshots/themes.png)
+
+*从左至右：Terminal 绿、Amber 琥珀、Paper 白、Ghost 浅色*
+
+### 桌面宠物
+
+![宠物图标](screenshots/pets.png)
+
+*从左至右：像素猫、像素兔、像素企鹅*
+
+### 界面截图
+
+**记事本模块**
+
+![记事本](screenshots/NOTEPAD.png)
+
+**待办事项**
+
+![待办清单](screenshots/MEMO.png)
+
+**音乐播放器**
+
+![音乐播放器](screenshots/PLAYER.png)
 
 ---
 
